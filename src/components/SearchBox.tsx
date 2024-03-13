@@ -1,3 +1,4 @@
+import { cn } from '@/utils/cn'
 import React, { ChangeEventHandler, FormEventHandler } from 'react'
 import { IoSearch } from 'react-icons/io5'
 
@@ -9,8 +10,10 @@ type Props = {
 }
 
 export default function SearchBox({className, searchValue, onChange, onSubmit}: Props) {
+  console.log('hello');
+  
   return (
-    <form className='flex relative items-center justify-center h-10' onSubmit={onSubmit}>
+    <form className={cn('flex relative items-center justify-center h-10', className)} onSubmit={onSubmit}>
         <input 
         value={searchValue}
         onChange={onChange}
