@@ -10,7 +10,6 @@ type Props = {
 }
 
 export default function SearchBox({className, searchValue, onChange, onSubmit}: Props) {
-  console.log('hello');
   
   return (
     <form className={cn('flex relative items-center justify-center h-10', className)} onSubmit={onSubmit}>
