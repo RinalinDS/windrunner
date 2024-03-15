@@ -1,6 +1,7 @@
 'use client'
 import Container from "@/components/Container";
 import NavBar from "@/components/NavBar";
+import WeatherIcon from "@/components/WeatherIcon";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { format } from "date-fns";
@@ -9,9 +10,10 @@ import { parseISO } from "date-fns/parseISO";
 
 
 export default function Home() {
+  // TODO CUSTOM Hook
   const { isLoading, error, data } = useQuery<WeatherData>({
     queryKey: ['weatherdata'], queryFn: async () => {
-      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=pune&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56&units=metric`)
+      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=kiev&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56&units=metric`)
       return data
     }
   }
@@ -53,15 +55,27 @@ export default function Home() {
                 <p className="text-xs space-x-1 whitespace-nowrap">
                   <span>Feels like  {Math.floor(firstDate?.main.feels_like ?? 0)}°</span>
                 </p>
-                <p className="text-sx space-x-2">
+                <p className="text-sx space-x-2 whitespace-nowrap">
                   <span> {Math.floor(firstDate?.main.temp_min ?? 0)}°&darr;</span>
                   <span> {Math.floor(firstDate?.main.temp_max ?? 0)}°&uarr;</span>
 
                 </p>
               </div>
               {/* time and weather icon */}
-              <div>
-
+              <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
+                {data?.list.map((d, i)=> {
+                  return (
+                    <div key={i} className="flex flex-col justify-between gap-2 items-center text-xs font-semibold">
+                      <p className="whitespace-nowrap">
+                        {format(parseISO(d.dt_txt), 'h:mm a')}
+                      </p>
+                      <WeatherIcon iconName={d.weather[0].icon} />
+                      <p>
+                      {Math.floor(d.main.temp ?? 0)}°
+                      </p>
+                    </div>
+                  )
+                })}
               </div>
             </Container>
           </div>
