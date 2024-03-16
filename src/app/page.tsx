@@ -1,10 +1,13 @@
 'use client'
 import Container from "@/components/Container";
 import NavBar from "@/components/NavBar";
+import WeatherDetails from "@/components/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
+import { convertWindSpeed } from "@/utils/convertWindSpeed";
+import { metersToKilometers } from "@/utils/mToKm";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { format } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 import { parseISO } from "date-fns/parseISO";
 import { ChangeEvent, useState } from "react";
 
@@ -96,12 +99,38 @@ export default function Home() {
               </div>
             </Container>
           </div>
-          <div>
 
+          {/* additional info about current Date */}      
+          <div className="flex gap-4">
+            {/* left */}
+                <Container className="w-fit justify-center flex-col px-4 items-center">
+                  <p className="capitalize text-center">
+                    {firstDate?.weather[0].description}
+                  </p>
+                  <WeatherIcon iconName={firstDate?.weather[0].icon ?? ''} />
+                </Container>
+
+            {/* right */}
+                  <Container className="bg-yellow-300/80 px-6 gap-4 justify-between overflow-x-auto">
+                    <WeatherDetails 
+                    airPressure={firstDate?.main.pressure ? `${firstDate.main.pressure} hPa` : ''} 
+                    visibility={firstDate?.visibility ? metersToKilometers(firstDate?.visibility) : ''}
+                    humidity={firstDate?.main.humidity ?`${firstDate.main.humidity}%` : ''}
+                    sunrise={data?.city.sunrise ? format(fromUnixTime(data?.city.sunrise), 'H:mm') : ''}
+                    sunset={data?.city.sunset ? format(fromUnixTime(data?.city.sunset), 'H:mm') : ''}
+                    windSpeed={firstDate?.wind.speed ? convertWindSpeed(firstDate.wind.speed) : ''}
+                    />
+                  </Container>
           </div>
+
+
         </section>
-        <section>
+        <section className="flex w-full flex-col gap-4">
           {/*forecst 7 day data */}
+
+          <p className="text-2xl">
+            Forecast (7 days)
+          </p>
 
         </section>
       </main>
