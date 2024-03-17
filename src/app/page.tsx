@@ -30,7 +30,6 @@ export default function Home() {
   const defaultDateString = '2000-01-01T00:00:00Z';
 
 
-  console.log('data', data);
 
   const firstDate = data?.list[0]
 
@@ -51,11 +50,7 @@ export default function Home() {
     const entryDate = new Date(entry.dt * 1000).toISOString().split('T')[0]
     return entryDate === uniqueDates[0]
   })
-  console.log(firstDayData, 'firstDayData');
 
-  console.log('uniqueDates', uniqueDates)
-
-  console.log('firstDateForEach', firstDataForEachDate)
 
   // TODO LOADER component
   if (isLoading || isFetching) {

@@ -64,7 +64,6 @@ export default function NavBar({location, setCurrentCity }: Props) {
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async(position)=> {
         const {latitude, longitude} = position.coords
-        console.log('lat', latitude, longitude)
         try {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`)
           setCurrentCity(response.data.name)
@@ -76,7 +75,6 @@ export default function NavBar({location, setCurrentCity }: Props) {
 
   }
 
-  console.log('suggestion', suggestions);
   
 
   return (
