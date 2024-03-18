@@ -1,15 +1,16 @@
+import { minCityLengthName } from '@/constants/minCityLengthName'
 import { cn } from '@/utils/cn'
-import React, { ChangeEventHandler, FormEventHandler } from 'react'
+import React, { ChangeEventHandler, FormEventHandler, memo } from 'react'
 import { IoSearch } from 'react-icons/io5'
 
 type Props = {
   onChange: ChangeEventHandler<HTMLInputElement>
-  onSubmit?: FormEventHandler<HTMLFormElement>
+  onSubmit: FormEventHandler<HTMLFormElement>
   searchValue: string;
   className?: string
 }
 
-export default function SearchBox({className, searchValue, onChange, onSubmit}: Props) {
+export default memo(function SearchBox({className, searchValue, onChange, onSubmit}: Props) {
   
   return (
     <form className={cn('flex relative items-center justify-center h-10', className)} onSubmit={onSubmit}>
@@ -20,9 +21,9 @@ export default function SearchBox({className, searchValue, onChange, onSubmit}: 
         placeholder='Search location...' 
         className='px-4 py-2 w-[230px] border border-gray-300 rounded-l-md focus:outline-none focus:border-blue-500 h-full'
         />
-        <button className='px-4 py-[9px] bg-blue-500 text-white rounded-r-md focus:outline-none enabled:hover:bg-blue-600 h-full disabled:opacity-50' disabled={searchValue.length < 3}>
+        <button className='px-4 py-[9px] bg-blue-500 text-white rounded-r-md focus:outline-none enabled:hover:bg-blue-600 h-full disabled:opacity-50' disabled={searchValue.length < minCityLengthName}>
         <IoSearch />
         </button>
         </form>
   )
-}
+})
