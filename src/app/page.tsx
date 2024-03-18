@@ -3,13 +3,14 @@ import { useGetForecast } from "@/api/queries/useGetForecast";
 import Container from "@/components/Container";
 import ForecastWeatherDetail from "@/components/ForecastWeatherDetail/ForecastWeatherDetail";
 import Loader from "@/components/Loader";
-import NavBar from "@/components/NavBar";
-import WeatherDetails from "@/components/WeatherDetails";
+import NavBar from "@/components/NavBar/NavBar";
+import WeatherDetails from "@/components/WeatherDetails/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
 import { defaultDateString } from "@/constants/defaultDateString";
 import { cn } from "@/utils/cn";
 import { convertWindSpeed } from "@/utils/convertWindSpeed";
 import { metersToKilometers } from "@/utils/mToKm";
+import { timestampToDateString } from "@/utils/timestampToDateString";
 import { format, fromUnixTime } from "date-fns";
 import { parseISO } from "date-fns/parseISO";
 import { useMemo, useState } from "react";
@@ -20,12 +21,7 @@ export default function Home() {
   const [currentCity, setCurrentCity] = useState('Kiev')
   const { data, isLoading } = useGetForecast({ currentCity })
 
-  const firstDate = data?.list[0]
-
-  const timestampToDateString = (timestamp: number): string => {
-    const date = new Date(timestamp * 1000);
-    return date.toISOString().split('T')[0];
-  };
+  const firstDate = useMemo(()=> data?.list[0] , [data?.list])
 
   const uniqueDates = useMemo(() => [
     ...new Set(data?.list.map(entry => new Date(entry.dt * 1000).toISOString().split('T')[0]))
@@ -51,6 +47,7 @@ export default function Home() {
   }
 
   // TODO DECOMPOSE
+  // TODO INSTALL PRETTIER
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
