@@ -1,12 +1,13 @@
 'use client'
 import { useGetForecast } from "@/api/queries/useGetForecast";
 import Container from "@/components/Container";
-import ForecastWeatherDetail from "@/components/ForecastWeatherDetail";
+import ForecastWeatherDetail from "@/components/ForecastWeatherDetail/ForecastWeatherDetail";
 import Loader from "@/components/Loader";
 import NavBar from "@/components/NavBar";
 import WeatherDetails from "@/components/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
 import { defaultDateString } from "@/constants/defaultDateString";
+import { cn } from "@/utils/cn";
 import { convertWindSpeed } from "@/utils/convertWindSpeed";
 import { metersToKilometers } from "@/utils/mToKm";
 import { format, fromUnixTime } from "date-fns";
@@ -84,7 +85,7 @@ export default function Home() {
               </div>
 
               {/* time and weather icon */}
-              <div className="flex gap-10 overflow-x-auto w-full justify-between pr-3 pb-3">
+              <div className={cn("flex gap-10 overflow-x-auto w-full justify-between pr-3 pb-3", `${firstDayData && firstDayData?.length > 3 ? 'justify-between' : 'justify-evenly'}`)}>
                 {firstDayData?.map((d, i) => {
                   return (
                     <div key={i} className="flex flex-col justify-between gap-2 items-center text-xs font-semibold">
