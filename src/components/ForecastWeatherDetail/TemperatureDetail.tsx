@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 type Props = {
     temp: number
@@ -9,7 +9,7 @@ type Props = {
 
 }
 
-export default function TemperatureDetail({ description, feelsLike, temp, tempMax, tempMin }: Props) {
+export default memo(function TemperatureDetail({ description, feelsLike, temp, tempMax, tempMin }: Props) {
     return (
         <div className='flex flex-col px-4 items-center'>
             <span className='text-5xl'>  {Math.floor(temp) ?? 0}° </span>
@@ -24,4 +24,4 @@ export default function TemperatureDetail({ description, feelsLike, temp, tempMa
             <p className='capitalize text-center'>{description}</p>
         </div>
     )
-}
+})

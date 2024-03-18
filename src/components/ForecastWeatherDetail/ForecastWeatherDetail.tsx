@@ -1,8 +1,10 @@
+import { memo } from 'react'
 import Container from '../Container'
-import WeatherDetails, { WeatherDetailsProps } from '../WeatherDetails'
+import WeatherDetails from '../WeatherDetails/WeatherDetails'
 import WeatherIcon from '../WeatherIcon'
 import DayDetail from './DayDetail'
 import TemperatureDetail from './TemperatureDetail'
+import { WeatherDetailsProps } from '@/types/WeatherComponentTypes'
 
 type Props = {
     weatherIcon: string
@@ -15,7 +17,7 @@ type Props = {
     description: string
 } & WeatherDetailsProps
 
-export default function ForecastWeatherDetail({ weatherIcon, date, day, temp, feelsLike, tempMax, tempMin, description, ...rest }: Props) {
+export default memo(function ForecastWeatherDetail({ weatherIcon, date, day, temp, feelsLike, tempMax, tempMin, description, ...rest }: Props) {
     return (
         <Container className='gap-4'>
             <section className='flex gap-4 items-center px-4'>
@@ -27,4 +29,4 @@ export default function ForecastWeatherDetail({ weatherIcon, date, day, temp, fe
             </section>
         </Container>
     )
-}
+})

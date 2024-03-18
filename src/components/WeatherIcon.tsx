@@ -1,12 +1,12 @@
 import { cn } from '@/utils/cn'
 import Image from 'next/image'
-import React from 'react'
+import React, { memo } from 'react'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     iconName: string
 }
 
-export default function WeatherIcon({ iconName, className, ...props }: Props) {
+export default memo(function WeatherIcon({ iconName, className, ...props }: Props) {
     return (
         <div {...props} className={cn('relative h-20 w-20', className)}>
             <Image
@@ -17,4 +17,4 @@ export default function WeatherIcon({ iconName, className, ...props }: Props) {
                 src={`https://openweathermap.org/img/wn/${iconName}@4x.png`} />
         </div>
     )
-}
+})

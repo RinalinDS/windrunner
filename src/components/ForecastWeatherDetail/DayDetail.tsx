@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import WeatherIcon from '../WeatherIcon'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
     day: string
 }
 
-export default function DayDetail({ weatherIcon = '02d', date = '19.09', day = 'Tuesday' }: Props) {
+export default memo(function DayDetail({ weatherIcon = '02d', date = '19.09', day = 'Tuesday' }: Props) {
     return (
         <div className='flex flex-col gap-1 items-center'>
             <WeatherIcon iconName={weatherIcon} />
@@ -15,4 +15,4 @@ export default function DayDetail({ weatherIcon = '02d', date = '19.09', day = '
             <p className='text-sm'>{day}</p>
         </div>
     )
-}
+})
