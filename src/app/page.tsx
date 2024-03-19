@@ -4,6 +4,9 @@ import Container from "@/components/Container";
 import ForecastWeatherDetail from "@/components/ForecastWeatherDetail/ForecastWeatherDetail";
 import Loader from "@/components/Loader";
 import NavBar from "@/components/NavBar/NavBar";
+import TodayDate from "@/components/TodayDate";
+import TodayTemperature from "@/components/TodayTemperature";
+import TodaysForecastItem from "@/components/TodaysForecastItem";
 import WeatherDetails from "@/components/WeatherDetails/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
 import { defaultDateString } from "@/constants/defaultDateString";
@@ -21,7 +24,7 @@ export default function Home() {
   const [currentCity, setCurrentCity] = useState('Kiev')
   const { data, isLoading } = useGetForecast({ currentCity })
 
-  const firstDate = useMemo(()=> data?.list[0] , [data?.list])
+  const firstDate = useMemo(() => data?.list[0], [data?.list])
 
   const uniqueDates = useMemo(() => [
     ...new Set(data?.list.map(entry => new Date(entry.dt * 1000).toISOString().split('T')[0]))
@@ -46,65 +49,35 @@ export default function Home() {
     )
   }
 
-  // TODO DECOMPOSE
   // TODO INSTALL PRETTIER
+  // TODO make readme
+  // TODO fill out github info
+  // TODO fill out fithub info for pinned repos
+  // TODO fill personal portfolio with new project
+  // TODO test coverage
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
       <NavBar location={data?.city.name} setCurrentCity={setCurrentCity} />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
         <section className="space-y-4">
-
-          {/*today data */}
           <div className="space-y-2">
-            <h2 className="flex gap-1 text-2xl items-end">
-              <p>
-                {firstDate?.dt_txt && format(parseISO(firstDate?.dt_txt), 'EEEE')}
-              </p>
-              <p className="text-lg">
-                {firstDate?.dt_txt && `(${format(parseISO(firstDate?.dt_txt), 'dd.MM.yyyy')})`}
-              </p>
-            </h2>
+            <TodayDate date={firstDate?.dt_txt} />
             <Container className="gap-10 px-6 items-center" >
+              <TodayTemperature temperature={firstDate?.main.temp} feelsLike={firstDate?.main.feels_like} minTemp={firstDate?.main.temp_min} maxTemp={firstDate?.main.temp_max} />
 
-              {/* temperature */}
-              <div className="flex flex-col px-4 items-center">
-                <span className="text-5xl">
-                  {Math.floor(firstDate?.main.temp ?? 0)}°
-                </span>
-                <p className="text-xs space-x-1 whitespace-nowrap">
-                  <span>Feels like  {Math.floor(firstDate?.main.feels_like ?? 0)}°</span>
-                </p>
-                <p className="text-xs space-x-2 whitespace-nowrap">
-                  <span> {Math.floor(firstDate?.main.temp_min ?? 0)}°&darr;</span>
-                  <span> {Math.floor(firstDate?.main.temp_max ?? 0)}°&uarr;</span>
-                </p>
-              </div>
-
-              {/* time and weather icon */}
               <div className={cn("flex gap-10 overflow-x-auto w-full justify-between pr-3 pb-3", `${firstDayData && firstDayData?.length > 3 ? 'justify-between' : 'justify-evenly'}`)}>
-                {firstDayData?.map((d, i) => {
+                {firstDayData?.map((data, i) => {
                   return (
-                    <div key={i} className="flex flex-col justify-between gap-2 items-center text-xs font-semibold">
-                      <p className="whitespace-nowrap">
-                        {d.dt_txt && format(parseISO(d.dt_txt), 'h:mm a')}
-                      </p>
-                      <WeatherIcon iconName={d.weather[0].icon} />
-                      <p>
-                        {Math.floor(d.main.temp ?? 0)}°
-                      </p>
-                    </div>
+                    <TodaysForecastItem key={data.dt_txt} icon={data.weather[0].icon} temperature={data.main.temp} date={data.dt_txt} />
                   )
                 })}
               </div>
-
             </Container>
           </div>
 
-          {/* additional info about current Date */}
-          <div className="flex gap-4">
 
-            {/* left */}
+          <div className="flex gap-4">
             <Container className="w-fit justify-center flex-col px-4 items-center">
               <p className="capitalize text-center">
                 {firstDate?.weather[0].description}
@@ -112,7 +85,6 @@ export default function Home() {
               <WeatherIcon iconName={firstDate?.weather[0].icon ?? ''} />
             </Container>
 
-            {/* right */}
             <Container className="bg-yellow-300/80 px-6 gap-4 justify-between overflow-x-auto">
               <WeatherDetails
                 airPressure={firstDate?.main.pressure ? `${firstDate.main.pressure} hPa` : ''}
@@ -124,12 +96,8 @@ export default function Home() {
               />
             </Container>
           </div>
-
-
         </section>
 
-
-        {/*forecst 5 day data */}
         <section className="flex w-full flex-col gap-4">
           <p className="text-2xl">
             Forecast (5 days)
