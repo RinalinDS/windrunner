@@ -1,5 +1,5 @@
 import { WeatherApi } from "@/api/api"
-import { minCityLengthName } from "@/constants/minCityLengthName"
+import { minCityLengthName } from "@/constants/minSizes"
 import { useDebounceSearch } from "@/hooks/useDebounceSearch"
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
