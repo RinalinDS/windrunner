@@ -19,7 +19,7 @@ export default memo(function SuggestionBox({ error, handleSuggestionClick, showS
                     {error && suggestions.length < 1 && (<li className='text-red-500 p-1'>{error}</li>)}
                     {suggestions.map((item, i) => {
                         return (
-                            <li key={i} className='cursor-pointer p-1 rounded hover:bg-gray-200' onClick={() => handleSuggestionClick(item)}> {item}   </li>
+                            <li key={`${item}${i}`} className='cursor-pointer p-1 rounded hover:bg-gray-200' onClick={() => handleSuggestionClick(item)}> {item}   </li>
                         )
                     })}
                 </ul>)}
