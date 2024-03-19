@@ -2,6 +2,15 @@
 
 Welcome to the Windrunner App, my first project built with Next.js and TailwindCSS. This application is designed to provide a simple yet effective way to check the weather for any city around the world. It's a testament to my journey into the world of modern web development, showcasing my exploration of the Next.js framework, TailwindCSS for styling, and the power of React Query for state management.
 
+## Deployment
+
+The Weather Checker App is deployed on two platforms for redundancy and ease of access:
+
+- **Vercel**: [https://windrunner.vercel.app/](https://windrunner.vercel.app/)
+- **Netlify**: [https://windrunner.netlify.app/](https://windrunner.netlify.app/)
+
+Feel free to use either link to access the application.
+
 ## Features
 
 - **City Search**: Type in the name of any city, and the app will fetch and display the current weather conditions for that location.
