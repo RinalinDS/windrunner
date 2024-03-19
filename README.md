@@ -4,7 +4,7 @@ Welcome to the Windrunner App, my first project built with Next.js and TailwindC
 
 ## Deployment
 
-The Weather Checker App is deployed on two platforms for redundancy and ease of access:
+The Windrunner App is deployed on two platforms for redundancy and ease of access:
 
 - **Vercel**: [https://windrunner.vercel.app/](https://windrunner.vercel.app/)
 - **Netlify**: [https://windrunner.netlify.app/](https://windrunner.netlify.app/)
