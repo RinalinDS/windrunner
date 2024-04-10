@@ -30,4 +30,10 @@ describe('timestampToDateString', () => {
 
     expect(result).toBe(expectedDate);
   });
+  it('should return an empty string for an invalid timestamp', () => {
+    const timestamp = 'weird string';
+    const result = timestampToDateString(timestamp as any);
+
+    expect(result).toBe('');
+  });
 });
