@@ -1,6 +1,7 @@
 import { WeatherApi } from '@/api/api';
 import { minCityLengthName } from '@/constants/minSizes';
 import { useDebounceSearch } from '@/hooks/useDebounceSearch';
+import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 export const useNavBarData = (setCurrentCity: (value: string) => void) => {
@@ -65,11 +66,14 @@ export const useNavBarData = (setCurrentCity: (value: string) => void) => {
   }, [setCurrentCity]);
 
   useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source();
     const handleSearchValueChange = async () => {
       if (debouncedSearchValue.length > minCityLengthName) {
         try {
-          const uniqueSuggestion =
-            await WeatherApi.getUniqueSuggestions(debouncedSearchValue);
+          const uniqueSuggestion = await WeatherApi.getUniqueSuggestions(
+            debouncedSearchValue,
+            cancelTokenSource
+          );
           setSuggestions(uniqueSuggestion);
           setError('');
           setShowSuggestions(true);
@@ -81,6 +85,10 @@ export const useNavBarData = (setCurrentCity: (value: string) => void) => {
       }
     };
     handleSearchValueChange();
+
+    return () => {
+      cancelTokenSource.cancel('Component unmounted or dependencies changed');
+    };
   }, [debouncedSearchValue, handleClearSuggestions]);
 
   return {
