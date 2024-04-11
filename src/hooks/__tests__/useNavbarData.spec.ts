@@ -5,10 +5,11 @@ import { useNavBarData } from '../useNavbarData';
 import { useDebounceSearch } from '../useDebounceSearch';
 
 describe('useNavbarData', () => {
+  const setCurrentCity = vi.fn();
+
   it('default return for useNavbarData', () => {
-    const setCurrentCity = vi.fn();
     const { result } = renderHook(() => useNavBarData(setCurrentCity));
-    console.log(result.current);
+
     expect(result.current.error).toEqual('');
     expect(result.current.searchValue).toEqual('');
     expect(result.current.showSuggestions).toBeFalsy();
@@ -24,7 +25,6 @@ describe('useNavbarData', () => {
       useDebounceSearch: vi.fn().mockReturnValue('London'),
     }));
 
-    const setCurrentCity = vi.fn();
     const getUniqueSuggestionsSpy = vi.spyOn(
       WeatherApi,
       'getUniqueSuggestions'

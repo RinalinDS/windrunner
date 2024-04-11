@@ -28,7 +28,7 @@ export const useNavBarData = (setCurrentCity: (value: string) => void) => {
     [setCurrentCity, handleClearSuggestions]
   );
 
-  const onChange = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     setSearchValue(value);
   }, []);
