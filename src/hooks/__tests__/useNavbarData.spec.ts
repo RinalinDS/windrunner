@@ -29,7 +29,7 @@ describe('useNavbarData', () => {
       WeatherApi,
       'getUniqueSuggestions'
     );
-    renderHook(() => useNavBarData(setCurrentCity));
+    const { result } = renderHook(() => useNavBarData(setCurrentCity));
 
     expect(getUniqueSuggestionsSpy).toHaveBeenCalledTimes(1);
 
