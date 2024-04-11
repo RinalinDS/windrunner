@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils';
 import React, { HTMLProps, memo } from 'react';
 
 export default memo(function Container({

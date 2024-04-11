@@ -1,6 +1,5 @@
-import { minCityLengthName } from '@/constants/minSizes';
-import { cn } from '@/utils/cn';
-import React, { ChangeEventHandler, FormEventHandler, memo } from 'react';
+import { cn } from '@/utils';
+import { ChangeEventHandler, FormEventHandler, memo } from 'react';
 import { IoSearch } from 'react-icons/io5';
 
 type Props = {

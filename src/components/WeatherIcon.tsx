@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils';
 import Image from 'next/image';
 import React, { memo } from 'react';
 

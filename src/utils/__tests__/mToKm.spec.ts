@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { metersToKilometers } from '../mToKm';
+import { metersToKilometers } from '..';
 
 describe('meters to kilometers util function should return correct string', () => {
   it('should return 11km with args 11234', () => {

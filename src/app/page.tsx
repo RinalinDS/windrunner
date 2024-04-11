@@ -10,10 +10,12 @@ import TodaysForecastItem from '@/components/TodaysForecastItem';
 import WeatherDetails from '@/components/WeatherDetails/WeatherDetails';
 import WeatherIcon from '@/components/WeatherIcon';
 import { defaultDateString } from '@/constants/defaultDateString';
-import { cn } from '@/utils/cn';
-import { convertWindSpeed } from '@/utils/convertWindSpeed';
-import { metersToKilometers } from '@/utils/mToKm';
-import { timestampToDateString } from '@/utils/timestampToDateString';
+import {
+  cn,
+  convertWindSpeed,
+  metersToKilometers,
+  timestampToDateString,
+} from '@/utils';
 import { format, fromUnixTime } from 'date-fns';
 import { parseISO } from 'date-fns/parseISO';
 import { useMemo, useState } from 'react';

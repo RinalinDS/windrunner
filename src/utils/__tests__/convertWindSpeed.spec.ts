@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertWindSpeed } from '../convertWindSpeed';
+import { convertWindSpeed } from '..';
 
 describe('convertWindSpeed util function should return correct string', () => {
   it('should return 3.6km/h with args 1', () => {

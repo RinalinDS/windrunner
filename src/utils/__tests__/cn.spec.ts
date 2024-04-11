@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cn } from '../cn';
+import { cn } from '..';
 
 describe('cn util function should return correct string', () => {
   it('should return default', () => {

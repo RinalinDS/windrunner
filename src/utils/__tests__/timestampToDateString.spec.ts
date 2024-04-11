@@ -1,5 +1,5 @@
 import { describe, it, expect, test } from 'vitest';
-import { timestampToDateString } from '../timestampToDateString';
+import { timestampToDateString } from '..';
 
 describe('timestampToDateString', () => {
   it('should return the correct date for a given timestamp', () => {
