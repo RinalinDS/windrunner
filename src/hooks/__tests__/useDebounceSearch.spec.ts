@@ -16,12 +16,20 @@ describe('useDebounceSearch', () => {
 
     expect(result.current).toBe('test');
 
-    // act(() => {
-    //   vi.advanceTimersByTime(200);
-    // });
-    //works
+    act(() => {
+      // vi.advanceTimersByTime(200); // works inside of act()
+      vi.advanceTimersToNextTimer(); // works inside of act()
+      // vi.runAllTimers(); // works inside of act()
+    });
+    // works;
 
-    await vi.advanceTimersByTimeAsync(200);
+    // await vi.advanceTimersByTimeAsync(200); // works
+
+    // vi.advanceTimersToNextTimer(); // don';t work
+
+    // vi.advanceTimersByTime(200); // don't work
+
+    // vi.runAllTimers(); // don';t work
 
     // await new Promise((resolve) => setTimeout(resolve, 200));
     //works
